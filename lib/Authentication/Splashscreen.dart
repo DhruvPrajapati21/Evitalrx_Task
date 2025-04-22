@@ -1,8 +1,10 @@
 import 'dart:async';
-import 'package:evitalrx_task/Homescreen/Homescreen.dart';
+import 'package:evitalrx_task/Authentication/Providers.dart';
+import 'package:evitalrx_task/Colors.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import 'Loginscreen.dart';
+import '../Homescreen/Homescreen.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -12,44 +14,37 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
-
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), _checkLoginStatus);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final auth = Provider.of<AuthProvider>(context, listen: false);
+      Timer(const Duration(seconds: 3), () {
+        if (auth.isLoggedIn) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => Homescreen()),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const Login()),
+          );
+        }
+      });
+    });
   }
 
-  _checkLoginStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-
-    if (isLoggedIn) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Homescreen()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
-    }
-  }
   @override
   Widget build(BuildContext context) {
-
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      body:SingleChildScrollView(
-        child:  SizedBox(
-          width: screenWidth,
-          height: screenHeight,
-          child: Image.asset(
-            "assets/images/splash.png",
-            fit: BoxFit.fill,
-          ),
+      backgroundColor: AppColors.splashBackground,
+      body: Center(
+        child: Image.asset(
+          'assets/images/splash.png',
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
         ),
       ),
     );
