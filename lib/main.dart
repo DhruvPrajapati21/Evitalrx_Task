@@ -1,5 +1,6 @@
 import 'package:evitalrx_task/Authentication/Providers.dart';
 import 'package:evitalrx_task/Homescreen/Batchesscreen.dart';
+import 'package:evitalrx_task/Homescreen/Homescreen.dart';
 import 'package:evitalrx_task/Homescreen/UserProvider.dart';
 import 'package:evitalrx_task/Homescreen/User_data.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'EvitalRx Medicine',
+      title: 'Notes app',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       home:Splashscreen(),

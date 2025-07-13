@@ -41,10 +41,8 @@ class _SplashscreenState extends State<Splashscreen> {
       backgroundColor: AppColors.splashBackground,
       body: Center(
         child: Image.asset(
-          'assets/images/splash.png',
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
+          'assets/images/logog.png',
+          fit: BoxFit.fill,
         ),
       ),
     );

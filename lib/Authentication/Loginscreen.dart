@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: const Text(
-          "EvitalRx",
+          "Notes app",
           style: TextStyle(
             fontFamily: "Times New Roman",
             fontWeight: FontWeight.bold,
@@ -169,7 +169,7 @@ class _LoginState extends State<Login> {
                           onPressed: () async {
                             setState(() => _attempted = true);
                             if (_formKey.currentState!.validate()) {
-                              if (_mobileController.text == '9033006262' && _passwordController.text == 'eVital@12') {
+                              if (_mobileController.text == '8780031661' && _passwordController.text == 'Notesd@12') {
                                 await auth.login();
                                 Fluttertoast.showToast(
                                   msg: 'Login successful',
